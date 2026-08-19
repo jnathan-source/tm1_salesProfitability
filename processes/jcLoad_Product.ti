@@ -1,0 +1,27 @@
+#region Prolog
+
+
+sDim = 'Product';
+sRoot = 'Total Product';
+
+AttrInsert( sDim, '', 'Name', 'A' );
+
+#endregion
+#region Metadata
+
+
+DimensionElementInsert(sDim, '', vProduct, 'N');
+DimensionElementInsert(sDim, '', vBrand, 'C');
+DimensionElementInsert(sDim, '', vCategory, 'C');
+
+DimensionElementComponentAdd( sDim, vBrand, vProduct, 1 );
+DimensionElementComponentAdd( sDim, vCategory, vBrand, 1 );
+DimensionElementComponentAdd( sDim, sRoot,vCategory, 1 );
+
+#endregion
+#region Data
+
+sName = vProduct | ' - ' | vProductName; 
+AttrPutS( sName, sDim, vProduct, 'Name' );
+
+#endregion

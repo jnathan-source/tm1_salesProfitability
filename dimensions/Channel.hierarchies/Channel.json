@@ -1,0 +1,51 @@
+{
+	"@type":"Hierarchy",
+	"Name":"Channel",
+	"Elements":
+	[
+		{
+			"Name":"Total Channel",
+			"Type":"Consolidated"
+		},
+		{
+			"Name":"Modern Trade",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Online",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Distributor",
+			"Type":"Numeric"
+		},
+		{
+			"Name":"Wholesale",
+			"Type":"Numeric"
+		}
+	],
+	"Edges":
+	[
+		{
+			"ParentName":"Total Channel",
+			"ComponentName":"Modern Trade",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total Channel",
+			"ComponentName":"Online",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total Channel",
+			"ComponentName":"Distributor",
+			"Weight":1
+		},
+		{
+			"ParentName":"Total Channel",
+			"ComponentName":"Wholesale",
+			"Weight":1
+		}
+	],
+	"Subsets@Code.links":[]
+}

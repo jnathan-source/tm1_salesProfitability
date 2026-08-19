@@ -1,0 +1,66 @@
+{
+	"@type":"Process",
+	"Name":"Import Sales",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"Import Sales.ti",
+	"UIData":"{\"MappingType\":\"data\",\"Cube\":\"Sales\",\"DataReset\":\"none\",\"DataResetView\":\"\",\"AddOrReplace\":false,\"Measure\":\"Sales_Msr\",\"Skips\":\"true,true,true\",\"Mappings\":[{\"id\":\"col0\",\"SourceType\":\"column\",\"Name\":\"column\",\"Type\":\"String\",\"Content\":\"element\",\"Qualifier\":\"level0\",\"Dimension\":\"Version\"},{\"id\":\"col1\",\"SourceType\":\"column\",\"Name\":\"customer_id\",\"Type\":\"String\",\"Content\":\"element\",\"Qualifier\":\"level0\",\"Dimension\":\"Customer\"},{\"id\":\"col2\",\"SourceType\":\"column\",\"Name\":\"product_id\",\"Type\":\"String\",\"Content\":\"element\",\"Qualifier\":\"level0\",\"Dimension\":\"Product\"},{\"id\":\"col3\",\"SourceType\":\"column\",\"Name\":\"timeperiod\",\"Type\":\"String\",\"Content\":\"element\",\"Qualifier\":\"level0\",\"Dimension\":\"TimePeriod\"},{\"id\":\"col4\",\"SourceType\":\"column\",\"Name\":\"quantity\",\"Type\":\"Numeric\",\"Content\":\"data\",\"Dimension\":\"Quantity\",\"PriorType\":\"String\"}]}",
+	"DataSource":
+	{
+		"Type":"ASCII",
+		"asciiDecimalSeparator":".",
+		"asciiDelimiterChar":",",
+		"asciiDelimiterType":"Character",
+		"asciiHeaderRecords":1,
+		"asciiQuoteCharacter":"\"",
+		"asciiThousandSeparator":",",
+		"dataSourceNameForClient":"",
+		"dataSourceNameForServer":"model_upload/FebSales.csv"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pResult",
+			"Prompt":"Import count result file",
+			"Value":"",
+			"Type":"String"
+		}
+	],
+	"Variables":
+	[
+		{
+			"Name":"column",
+			"Type":"String",
+			"Position":1,
+			"StartByte":0,
+			"EndByte":0
+		},
+		{
+			"Name":"customer_id",
+			"Type":"String",
+			"Position":2,
+			"StartByte":0,
+			"EndByte":0
+		},
+		{
+			"Name":"product_id",
+			"Type":"String",
+			"Position":3,
+			"StartByte":0,
+			"EndByte":0
+		},
+		{
+			"Name":"timeperiod",
+			"Type":"String",
+			"Position":4,
+			"StartByte":0,
+			"EndByte":0
+		},
+		{
+			"Name":"quantity",
+			"Type":"String",
+			"Position":5,
+			"StartByte":0,
+			"EndByte":0
+		}
+	]
+}

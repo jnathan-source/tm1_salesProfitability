@@ -1,0 +1,71 @@
+#region Prolog
+
+sCube = 'SalesProfitability'; 
+
+sView = sCube;
+sSubset = sView;
+
+IF ( ViewExists(sCube, sView) = 0 );
+    ViewCreate(sCube, sView,1 );
+ENDIF;
+
+sDim = 'Version';
+sElem = pVersion; 
+
+IF ( SubsetExists(sDim, sSubset) = 0 );
+    SubsetCreate(sDim, sSubset,1);
+ENDIF;
+SubsetDeleteAllElements( sDim, sSubset);
+SubsetElementInsert( sDim, sSubset, sElem, 1);
+ViewSubsetAssign(sCube, sView, sDim, sSubset);
+
+ViewZeroOut( sCube, sView );
+
+#endregion
+#region Data
+
+sTime = vTime;
+
+vMonth = SUBST(sTime,1,SCAN('/',sTime)-1);
+vRemain = TRIM(SUBST(sTime,SCAN('/',sTime)+1, LONG(sTime)));
+vDay =  SUBST(vRemain,1,SCAN('/',vRemain)-1);
+vRemain1 = TRIM(SUBST(vRemain,SCAN('/',vRemain)+1, LONG(vRemain)));
+sYear = vRemain1; 
+
+IF( vMonth @= '1');
+    sMonth = 'Jan';
+elseif( vMonth @= '2');
+    sMonth = 'Feb';
+elseif( vMonth @= '3');
+    sMonth = 'Mar';
+elseif( vMonth @= '4');
+    sMonth = 'Apr';
+elseif( vMonth @= '5');
+    sMonth = 'May';
+elseif( vMonth @= '6');
+    sMonth = 'Jun';
+elseif( vMonth @= '7');
+    sMonth = 'Jul';
+elseif( vMonth @= '8');
+    sMonth = 'Aug';
+elseif( vMonth @= '9');
+    sMonth = 'Sep';
+elseif( vMonth @= '10');
+    sMonth = 'Oct';
+elseif( vMonth @= '11');
+    sMonth = 'Nov';
+elseif( vMonth @= '12');
+    sMonth = 'Dec';
+endif;
+
+sTimePeriod =  sMonth | ' ' | sYear;
+
+CellIncrementN(vUnits, sCube, pVersion, vStore, vProduct, sTimePeriod, 'Units Sold'); 
+nUnits =  CellGetN(sCube, pVersion, vStore, vProduct, sTimePeriod, 'Units Sold');
+nGrossSales =  nUnits * CellGetN('UnitPrice', pVersion, vProduct, sTimePeriod, 'Price in USD'); 
+CellPutn(nGrossSales, sCube, pVersion, vStore, vProduct, sTimePeriod, 'Gross Sales'); 
+nSalesDiscount = nGrossSales * CellGetN('StoreDiscount', pVersion, vStore, sTimePeriod, 'Discount Percent' ); 
+CellPutn(nSalesDiscount, sCube, pVersion, vStore, vProduct, sTimePeriod, 'Sales Discount'); 
+CellIncrementN(vCOS, sCube, pVersion, vStore, vProduct, sTimePeriod, 'Cost of Sales'); 
+
+#endregion
