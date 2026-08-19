@@ -1,0 +1,14 @@
+#region Prolog
+
+
+sDim = 'Channel';
+sRoot = 'Total Channel';
+#endregion
+#region Metadata
+
+
+DimensionElementInsert(sDim, '', vChannel, 'N');
+
+DimensionElementComponentAdd( sDim, sRoot, vChannel, 1 );
+
+#endregion

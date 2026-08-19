@@ -1,0 +1,38 @@
+#region Prolog
+MinorErrorLogMax = -1;
+OnMinorErrorDoItemSkip = 1;
+CurrentLogSetting = CubeGetLogChanges('ProductDiscount');
+CubeSetLogChanges('ProductDiscount', 0);
+NumMetaRowsRead = 0;
+NumMetaRowsProcessed = 0;
+NumRowsRead = 0;
+NumRowsProcessed = 0;
+SetInputCharacterSet('TM1CS_ISO_8859_1');
+#endregion
+#region Metadata
+NumMetaRowsRead = NumMetaRowsRead + 1;
+If(column@<>'');
+HierarchyElementInsert('Version','Version','',column,'N');
+EndIf;
+If(product_id@<>'');
+HierarchyElementInsert('Product','Product','',product_id,'N');
+EndIf;
+If(to_char@<>'');
+HierarchyElementInsert('TimePeriod','TimePeriod','',to_char,'N');
+EndIf;
+NumMetaRowsProcessed = NumMetaRowsProcessed + 1;
+#endregion
+#region Data
+NumRowsRead = NumRowsRead + 1;
+If (discountpercent @<> '');
+CellPutN(StringToNumberEx(discountpercent,'.',','),'ProductDiscount',column,product_id,to_char,'Discount%');
+NumRowsProcessed = NumRowsProcessed + 1;
+EndIf;
+#endregion
+#region Epilog
+If (pResult @<> '');
+TextOutput(pResult, NumberToString(NumRowsRead), NumberToString(NumRowsProcessed), NumberToString(NumMetaRowsRead), NumberToString(NumMetaRowsProcessed));
+EndIf;
+CubeSaveData('ProductDiscount');
+CubeSetLogChanges('ProductDiscount', CurrentLogSetting);
+#endregion

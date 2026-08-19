@@ -1,0 +1,6 @@
+{
+	"@type":"Subset",
+	"Name":"Default",
+	"Alias":"MEMBER_NAME",
+	"Expression":"{[TimePeriod].[TimePeriod].MEMBERS}"
+}

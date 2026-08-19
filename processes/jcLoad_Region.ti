@@ -1,0 +1,27 @@
+#region Prolog
+
+
+sDim = 'Region';
+sRoot = 'Total Region';
+
+AttrInsert( sDim, '', 'Store Type', 'S' );
+AttrInsert( sDim, '', 'Name', 'A' );
+#endregion
+#region Metadata
+
+
+DimensionElementInsert(sDim, '', vStore, 'N');
+DimensionElementInsert(sDim, '', vCity, 'C');
+DimensionElementInsert(sDim, '', vCountry, 'C');
+
+DimensionElementComponentAdd( sDim, vCity, vStore, 1 );
+DimensionElementComponentAdd( sDim, vCountry, vCity, 1 );
+DimensionElementComponentAdd( sDim, sRoot, vCountry, 1 );
+
+#endregion
+#region Data
+
+AttrPutS( vType, sDim, vStore, 'Store Type' );
+AttrPutS( vStore | ' - '| vStoreName, sDim, vStore, 'Name' );
+
+#endregion

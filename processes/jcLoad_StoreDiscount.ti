@@ -1,0 +1,48 @@
+#region Prolog
+
+
+sCube = 'StoreDiscount'; 
+#endregion
+#region Data
+
+sTime = vTime;
+
+vMonth = SUBST(sTime,1,SCAN('/',sTime)-1);
+vRemain = TRIM(SUBST(sTime,SCAN('/',sTime)+1, LONG(sTime)));
+vDay =  SUBST(vRemain,1,SCAN('/',vRemain)-1);
+vRemain1 = TRIM(SUBST(vRemain,SCAN('/',vRemain)+1, LONG(vRemain)));
+sYear = vRemain1; 
+
+IF( vMonth @= '1');
+    sMonth = 'Jan';
+elseif( vMonth @= '2');
+    sMonth = 'Feb';
+elseif( vMonth @= '3');
+    sMonth = 'Mar';
+elseif( vMonth @= '4');
+    sMonth = 'Apr';
+elseif( vMonth @= '5');
+    sMonth = 'May';
+elseif( vMonth @= '6');
+    sMonth = 'Jun';
+elseif( vMonth @= '7');
+    sMonth = 'Jul';
+elseif( vMonth @= '8');
+    sMonth = 'Aug';
+elseif( vMonth @= '9');
+    sMonth = 'Sep';
+elseif( vMonth @= '10');
+    sMonth = 'Oct';
+elseif( vMonth @= '11');
+    sMonth = 'Nov';
+elseif( vMonth @= '12');
+    sMonth = 'Dec';
+endif;
+
+sTimePeriod =  sMonth | ' ' | sYear;
+
+    
+CellPutN(vPercent, sCube, 'Actual', vStore, sTimePeriod, 'Discount Percent'); 
+CellPutN(vPercent, sCube, 'Forecast', vStore, sTimePeriod, 'Discount Percent'); 
+CellPutN(vPercent, sCube, 'Plan', vStore, sTimePeriod, 'Discount Percent'); 
+#endregion
